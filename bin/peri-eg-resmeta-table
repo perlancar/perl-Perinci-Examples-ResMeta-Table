@@ -1,0 +1,68 @@
+#!perl
+
+# DATE
+# VERSION
+
+use 5.010001;
+use strict;
+use warnings;
+
+use Getopt::Long;
+use Perinci::Examples::ResMeta::Table;
+use Perinci::Result::Format::Lite;
+
+my $examples = \%Perinci::Examples::ResMeta::Table::Examples;
+
+my %Opts = (
+);
+GetOptions(
+    'raw|r' => \$Opts{raw},
+    'list|l' => \$Opts{list},
+);
+
+if ($Opts{list}) {
+    print map { "$_\n" } sort keys %$examples;
+} elsif (!$ARGV[0]) {
+    die "Usage: $0 <example-name>\n";
+} elsif ($examples->{$ARGV[0]}) {
+    my $res = $examples->{$ARGV[0]}{result};
+    if ($Opts{raw}) {
+        require Data::Dump;
+        Data::Dump::dd($res);
+    } else {
+        print Perinci::Result::Format::Lite::format($res, 'text-pretty');
+    }
+} else {
+    die "Unknown example '$ARGV[0]'\n";
+}
+
+# ABSTRACT: Render example in Perinci::Examples::ResMeta::Table using Perinci::Result::Format::Lite
+# PODNAME:
+
+=head1 SYNOPSIS
+
+Usage:
+
+ % peri-eg-resmeta-table [OPTIONS] <example-name>
+ % peri-eg-resmeta-table --list
+
+Example:
+
+ % peri-eg-resmeta-table fields1
+
+To show raw, unformatted result:
+
+ % peri-eg-resmeta-table fields1 --raw
+
+
+=head1 OPTIONS
+
+=over
+
+=item * --raw, -r
+
+=item * --list, -l
+
+=back
+
+=cut
