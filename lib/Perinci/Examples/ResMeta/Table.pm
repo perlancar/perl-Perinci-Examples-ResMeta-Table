@@ -61,6 +61,39 @@ our %Examples = (
             },
         ],
     },
+    field_format_iso8601_datetime => {
+        summary => 'field format: iso8601_datetime',
+        result => [
+            200, "OK",
+            [
+                ['kiss land', 1378746001], # 2013-09-10 + 1sec
+                ['beauty behind the madness', 1440694802], # 2015-08-28 + 2sec
+                ['starboy', 1480006803], # 2016-11-25 + 3sec
+            ],
+            {
+                'table.fields' => [qw/title release_date/],
+                'table.field_formats' => [undef, 'iso8601_datetime'],
+            },
+        ],
+    },
+    field_format_number => {
+        summary => 'field format: number',
+        result => [
+            200, "OK",
+            [
+                map {[map {rand()*100_000+1} 1..3]} 1..7
+            ],
+            {
+                'table.fields' => [map {"num$_"} 1..3],
+                'table.field_formats' => [
+                    [number => {precision=>0}],
+                    [number => {precision=>2}],
+                    [number => {precision=>4}],
+                ],
+                'table.field_aligns' => [map {"right"} 1..3],
+            },
+        ],
+    },
 );
 
 1;
