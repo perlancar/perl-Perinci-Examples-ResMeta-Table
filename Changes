@@ -1,16 +1,16 @@
-0.003   2018-09-10 (PERLANCAR)
+0.003   2018-09-10  Released-By: PERLANCAR
 
         - No functional changes.
 
         - [dist] Remove dependency to DefHash.
 
 
-0.002   2017-05-31 (PERLANCAR)
+0.002   2017-05-31  Released-By: PERLANCAR
 
 	- Add examples: field_format_iso8601_datetime, field_format_number
 	  (Perinci::Result::Format::Lite 0.25).
 
 
-0.001   2017-05-24 (PERLANCAR)
+0.001   2017-05-24  Released-By: PERLANCAR
 
         - First release.
